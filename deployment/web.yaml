@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: web
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: web
@@ -12,9 +12,14 @@ spec:
       labels:
         app: web
     spec:
+      tolerations:
+      - effect: PreferNoSchedule
+        key: node-role.kubernetes.io/master
+      - effect: NoSchedule
+        key: node.kubernetes.io/unschedulable
       containers:
         - name: web
-          image: httpd:2.4.32
+          image: local.harbor.io/library/httpd:2.4.32
           imagePullPolicy: Always
           resources:
             requests:

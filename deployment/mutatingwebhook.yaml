@@ -5,11 +5,11 @@ metadata:
   labels:
     app: lxcfs-admission-webhook
 webhooks:
-  - name: mutating.lxcfs-admission-webhook.aliyun.com
+  - name: mutating.lxcfs-admission-webhook.alcor.io
     clientConfig:
       service:
         name: lxcfs-admission-webhook-svc
-        namespace: default
+        namespace: kube-system
         path: "/mutate"
       caBundle: ${CA_BUNDLE}
     rules:

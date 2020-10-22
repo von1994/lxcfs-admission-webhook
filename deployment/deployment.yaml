@@ -14,9 +14,14 @@ spec:
       labels:
         app: lxcfs-admission-webhook
     spec:
+      tolerations:
+      - effect: PreferNoSchedule
+        key: node-role.kubernetes.io/master
+      - effect: NoSchedule
+        key: node.kubernetes.io/unschedulable
       containers:
         - name: lxcfs-admission-webhook
-          image: registry.cn-hangzhou.aliyuncs.com/denverdino/lxcfs-admission-webhook:v1
+          image: local.harbor.io/library/lxcfs-admission-webhook:v1
           imagePullPolicy: IfNotPresent
           args:
             - -tlsCertFile=/etc/webhook/certs/cert.pem
